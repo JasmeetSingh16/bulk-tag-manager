@@ -1,7 +1,6 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
-
 client_id = "a8baad26fed6e3d2088dae46a8e5e1cb"
-application_url = "https://example.com"
+application_url = "https://bulk-tag-manager-production.up.railway.app"
 embedded = true
 name = "my-first-app"
 
@@ -45,8 +44,7 @@ api_version = "2026-10"
   topics = [ "app/scopes_update" ]
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://bulk-tag-manager-production.up.railway.app/auth/callback" ]
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true
