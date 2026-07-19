@@ -2,7 +2,7 @@
 client_id = "a8baad26fed6e3d2088dae46a8e5e1cb"
 application_url = "https://bulk-tag-manager-production.up.railway.app"
 embedded = true
-name = "my-first-app"
+name = "Bulk Tag Manager"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
@@ -43,6 +43,17 @@ api_version = "2026-10"
   uri = "/webhooks/app/scopes_update"
   topics = [ "app/scopes_update" ]
 
+[[webhooks.subscriptions]]
+  uri = "/webhooks/customers/data_request"
+  topics = [ "customers/data_request" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/customers/redact"
+  topics = [ "customers/redact" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/shop/redact"
+  topics = [ "shop/redact" ]
 [auth]
 redirect_urls = [ "https://bulk-tag-manager-production.up.railway.app/auth/callback" ]
 
