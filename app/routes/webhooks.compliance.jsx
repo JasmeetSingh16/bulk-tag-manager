@@ -2,17 +2,23 @@ import { authenticate } from "../shopify.server";
 import db from "../db.server";
 
 export const action = async ({ request }) => {
-  const { shop, topic } = await authenticate.webhook(request);
+  try {
+    const { shop, topic } = await authenticate.webhook(request);
 
-  console.log(`Received ${topic} webhook for ${shop}`);
+    console.log(`Received ${topic} webhook for ${shop}`);
 
-  if (topic === "SHOP_REDACT") {
-    // Clean up any remaining session data for this shop
-    await db.session.deleteMany({ where: { shop } });
+    if (topic === "SHOP_REDACT") {
+      await db.session.deleteMany({ where: { shop } });
+    }
+
+    return new Response();
+  } catch (error) {
+    console.error("Webhook authentication failed:", error);
+
+    if (error instanceof Response) {
+      return error;
+    }
+
+    return new Response("Unauthorized", { status: 401 });
   }
-
-  // This app does not store any customer data, so customers/data_request
-  // and customers/redact require no further action.
-
-  return new Response();
 };
